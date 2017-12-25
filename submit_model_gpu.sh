@@ -1,28 +1,27 @@
 #!/bin/bash
 
 new_instance_name="test-gpu1"
-gce_username="207229"
-project="nyt-toner-dev"
-boot_image_name="gpu1-cpu6-ram30gb-250gb-tensorflow"
-image_project=$project
+gce_username="my_gce_username" # account username for your GCE instance
+project="my-proj-dev"          # project-id
+boot_image_name="gpu1-cpu6-ram30gb-250gb-tensorflow" # pre-created boot image
+image_project=$project         # ususally the same as project-id
 
 # VM Instance configurations. Use GCE console's `Create Instance` for reference
-machine_type="custom-6-24576"
+machine_type="custom-6-24576"  # 6 CPUs, 24576Mb RAM
 maintenance_policy="TERMINATE" # gpu cannot be migrated
 accelerator="type=nvidia-tesla-k80,count=1"  # GPU config 
-min_cpu_platform='Intel Broadwell'
-boot_disk_size="250"
-zone="us-east1-c"
+min_cpu_platform='Intel Broadwell' # CPU types
+boot_disk_size="250"           # 250 Gb
+zone="us-east1-c"	       # recommend "us-east1-c"	
 
 # Trainer Variables
-job_id=$new_instance_name
-job_dir="gs://nyt-toner/test_dir"
-trainer_module="trainer.test"
-trainer_package_path="./package/"
+job_id=$new_instance_name          # unique job id
+job_dir="gs://my-proj/test_dir"    # parent dir for your jon on GCS
+trainer_module="trainer.test"      # module that actually dose the training
+trainer_package_path="./package/"  # package on local drive
 trainer_config="./trainer_configs/trainer_config.yaml"
-train_data_path="gs://nyt-toner/"  # data need to be pre-uploaded to GCS
-project="nyt-toner-dev" 
-keep_alive=500
+train_data_path="gs://my-proj/"    # data need to be pre-uploaded to GCS
+keep_alive=500                     # seconds to keep alive for (debugging purpose only) once training completes
 
 
 
