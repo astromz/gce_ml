@@ -1,0 +1,14 @@
+---
+# Example trainer configuration for GCE_ML.
+
+score_metric : "mse"  # mean squared error
+loss: "binary_crossentropy"
+lr : 0.001  # learning rate
+lr_decay: 0.001
+optimizer_name: "adam"
+n_epochs: 5  # num of epochs to train
+patience: 5  # early stopping epochs
+pool_method: "average"
+use_transposed_conv : True
+
+...
