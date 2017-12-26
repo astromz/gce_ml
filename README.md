@@ -14,7 +14,7 @@ This package makes ML model training with Google Compute Engine (GCE) easy with 
 
 
 ### Create a GCE instance and then a custom boot image
-We will create a new GCE virtual machine instance using a public image and customize it. You can then create GCE instances using pre-existing custom images later. *This instruction is based on the example and steps from [here](https://github.com/GoogleCloudPlatform/ml-on-gcp/tree/master/gce/survival-training) with modifications and a few more details.*
+We will create a new GCE virtual machine instance using a public image and customize it. You can then create GCE instances using pre-existing custom images later. *This instruction is based on the example and steps from [here (Compute Engine survival training)](https://github.com/GoogleCloudPlatform/ml-on-gcp/tree/master/gce/survival-training) with modifications and a few more details.*
 
 1. Create your instance. The easiest way is to use the Cloud Console [here](create the Compute Engine instance through the Cloud Console). Follow this [link](https://cloud.google.com/compute/docs/instances/create-start-instance).
     - Feel free to play with the customization of CPUs, memory, disk storage, etc. For GPUs, see below.
@@ -58,7 +58,10 @@ We will create a new GCE virtual machine instance using a public image and custo
     - Next, finish the rest of the steps by following the instructions [here](https://github.com/GoogleCloudPlatform/ml-on-gcp/blob/master/gce/survival-training/README-tf-estimator.md#cudnn-library).
 
 
-3. Create a customized boot image
+3. Create a pre-configured boot image
+
+    - Custom images allow you to create new instances with exactly the state you configured, so you won't have to install CUDA drivers and python packages, etc. That is, you only need to do these configurations and setups once.
+
     - First, install all required **Python (2.7)** packages and libraries in your instance (e.g., pip, numpy, pandas, matplotlib, scipy, sklearn, etc.)
 
       + To do this, we must install everything under `root` in order to make the automatic model submission and training feature work. Now, log in as `root` in your instance by typing:
