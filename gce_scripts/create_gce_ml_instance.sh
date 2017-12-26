@@ -157,7 +157,7 @@ echo
 
 # Check startup.sh script
 STARTUP="./gce_scripts/gce_ml_custom_startup.sh"
-if !ls ${trainer_package_path} &> /dev/null
+if !ls ${STARTUP} &> /dev/null
 then
   echo "STARTUP.sh NOT FOUND! Make sure you have '$STARTUP'.  EXIT"
   exit 3 # local file not found error
@@ -167,7 +167,6 @@ fi
 gcloud config set compute/zone $ZONE &> /dev/null
 
 # Original project the current console was in
-#original_proj=$(gcloud config list | grep project | cut -d'=' -f 2)
 original_proj=$(gcloud config get-value project)
 echo "Current Project = $original_proj"
 if [ "$original_proj" != "$PROJ_NAME" ]
@@ -294,7 +293,7 @@ echo
 
 if [ $create == true ] && [ $restart == false ]
 then
-  if [ -z ${accelerator+x} ]
+  if [ -z ${accelerator+x} ]   # if var accelerator is set
   then
     echo '--> Creating new instance WITHOUT GPU...'
 
