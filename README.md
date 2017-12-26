@@ -87,7 +87,7 @@ We will create a new GCE virtual machine instance using a public image and custo
 
 
 4. Set up your model in python
-    - Clone this repository and use the model in `package/` as an example.
+    - Clone this repository and use the model in `package_example/` as an example.
     - Your model training package should be constructed in pretty much the same way as in Cloud ML instances. Follow the exact folder structure when making your own cloud ML package [here](https://cloud.google.com/ml-engine/docs/images/recommended-project-structure.png) and [here](https://cloud.google.com/ml-engine/docs/how-tos/packaging-trainer). Change `setup.py` and `trainer.task.py` accordingly.
     - **NOTE:** There is however one small difference between this package and Cloud ML -- your model input variables are supplied by an external `yaml` configuration file instead of using `bash` command. This actually makes your training easier to manage, as once you set up your gce_ml submission script, the only things you need to change are the `yaml` configuration file (for different model parameters) and the new instance name.
 

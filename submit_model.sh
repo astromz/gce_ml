@@ -25,7 +25,7 @@ keep_alive=700                     # seconds to stay alive for debugging once tr
 
 
 
-./gce_scripts/create_instance.sh --instance "$new_instance_name" --image "$boot_image_name" --gce_username "$gce_username" \
+./gce_scripts/create_gce_ml_instance.sh --instance "$new_instance_name" --image "$boot_image_name" --gce_username "$gce_username" \
   --image-project "$image_project" --machine-type "$machine_type" --maintenance-policy "$maintenance_policy" \
   --min-cpu-platform "$min_cpu_platform" --boot-disk-size "$boot_disk_size" --zone "$zone" \
   --job_id "$job_id" --job_dir "$job_dir" --trainer_module "$trainer_module" \

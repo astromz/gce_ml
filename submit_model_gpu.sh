@@ -1,6 +1,6 @@
 #!/bin/bash
 
-new_instance_name="test-gpu1"
+new_instance_name="test-gpu1"  
 gce_username="my_gce_username" # account username for your GCE instance
 project="my-proj-dev"          # project-id
 boot_image_name="gpu1-cpu6-ram30gb-250gb-tensorflow" # pre-created boot image
@@ -25,7 +25,7 @@ keep_alive=500                     # seconds to keep alive for (debugging purpos
 
 
 
-./gce_scripts/create_instance.sh --instance "$new_instance_name" --image "$boot_image_name" --gce_username "$gce_username" \
+./gce_scripts/create_gce_ml_instance.sh --instance "$new_instance_name" --image "$boot_image_name" --gce_username "$gce_username" \
   --image-project "$image_project" --machine-type "$machine_type" --maintenance-policy "$maintenance_policy" \
   --accelerator $accelerator --min-cpu-platform "$min_cpu_platform" --boot-disk-size "$boot_disk_size" \
   --job_id "$job_id" --job_dir "$job_dir" --trainer_module "$trainer_module" \
