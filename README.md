@@ -122,3 +122,5 @@ Finally, we are ready to set up this package and train your models.
     - Finally, **remember to delete your instance** from either the Cloud Console or command line. It will automatically shut down but won't delete itself from the cloud. Each instance (and its associated job) is supposed to have a unique name so you don't really need it afterwards (reuse won't save resource).
 
           $ gcloud compute instances delete my-instance
+
+    - Don't worry, your models, checkpoints, and `syslog` are all saved in your job's unique GCS bucket (again, like Cloud ML). You can find all relevant information on GCS as long as you save your model outputs there by following the example.
