@@ -118,7 +118,7 @@ Finally, we are ready to set up this package and train your models.
 
           $ gcloud compute instances tail-serial-port-output my-instance-with-gpu --port 1
 
-    - Your instance will automatically shut down (can be restarted later) once completed. If needed, you can keep it alive for a given number of seconds so you can log in and debug.
-    - Once completed, **remember to delete your instance** from either the Cloud Console or command line. Each instance (and its associated job) is supposed to have a unique name so you don't really need it afterwards (reuse won't save resource). 
+    - Your instance **will automatically shut down** once completed, and can be restarted later. If needed, you can keep it alive for a given number of seconds so you can log in and debug.
+    - Finally, **remember to delete your instance** from either the Cloud Console or command line. It will automatically shut down but won't delete itself from the cloud. Each instance (and its associated job) is supposed to have a unique name so you don't really need it afterwards (reuse won't save resource).
 
           $ gcloud compute instances delete my-instance
