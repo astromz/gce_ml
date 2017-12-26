@@ -1,5 +1,5 @@
 # gce_ML
-This package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to [Cloud ML](https://cloud.google.com/ml-engine/docs/technical-overview) but has more flexibility for custom GPU, CPU, and RAM configurations.
+This package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to the [Cloud ML Engine](https://cloud.google.com/ml-engine/docs/technical-overview) but offers more flexibility for customization (e.g., GPU, CPU, and RAM configurations) and debugging.
 
 
 ### Prerequisite
