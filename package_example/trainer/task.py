@@ -1,22 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Wrapper function that passes command line inputs to the actual trainer for GCloud ML.
+Wrapper function that passes command line inputs to the actual trainer for either Cloud ML or GCE ML.
 Supports both python2 and python3.
 
-Must config model_config_batch4_c.yaml first before running model.
+Must config `trainer_configs/trainer_config.yaml` first before running model.
 All parameters and network architecture are configured in that file!
 
-Example:
-+ run locally inside cloud_ml/:
-    `python cloud_ml/task.py --train_config_file model_config_batch4_c.yaml --train_data_path /Users/207229/Work/toner/data_batch4/ --job-dir /Users/207229//Work/toner/model_outputs/ `
-
-+ run using cloud-ml-engine:
-    `>cd ~/work/toner/source/cloud_ml`
-    `> ./gcloud.local.run.sh`
-
 ----------
-Created on Mon Jun 19 15:09:06 2017
+Created on Mon Oct 19 2017
 @author: Ming Zhao
 """
 from __future__ import absolute_import, division, print_function
@@ -30,6 +22,7 @@ from trainer import mnist_autoencoder_deconv_simple
 
 
 if __name__ =='__main__':
+    # test write permission by writing something random to disk
     with open('testing_output.txt', 'w+') as f:
         f.write('Hello World!\n')
         f.write('This is a test written by custom startup script!\n')
@@ -38,6 +31,7 @@ if __name__ =='__main__':
     dir_path = os.path.dirname(os.path.realpath(__file__))
     print('Current path: {}'.format(dir_path))
 
+    # Now code that actually does stuff
     parser = argparse.ArgumentParser()
 
     # Required Arguments
@@ -67,6 +61,6 @@ if __name__ =='__main__':
     with file_io.FileIO(args.config_file, 'r') as f:  # This reads BOTH local files and GS bucket files!!!
         config = yaml.load(f)
 
-    print(args.job_dir, args.job_id, config)
+    # actually training happens here
     mnist_autoencoder_deconv_simple.train(job_dir=args.job_dir, job_id=args.job_id,
                                           data_path=args.data_path, **config)

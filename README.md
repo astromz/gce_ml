@@ -25,11 +25,11 @@ We will create a new instance using a public image and customize it. You can cre
     - Now click `Create` to create your VM instance.
     - To check your instance:
 
-          `gcloud compute instances list`
+          $ gcloud compute instances list
 
     - To log in to your instance:
 
-          `gcloud compute ssh my_instance --zone=us-east1-c`
+          $ gcloud compute ssh my_instance --zone=us-east1-c
 
 
 2. Add GPU(s) to your instance
@@ -38,7 +38,7 @@ We will create a new instance using a public image and customize it. You can cre
     - Now, log in to your instance and install CUDA drivers:
         + Log in:
 
-              gcloud compute ssh [my_instance] --zone=us-east-1c
+              $ gcloud compute ssh [my_instance] --zone=us-east-1c
 
         + Follow [this link](https://cloud.google.com/compute/docs/gpus/add-gpus#install-driver-script) to install drivers. Click `UBUNTU` to see the script for `Ubuntu 16.04 LTS - CUDA 8` (other driver versions are not supported!).
     - Note the [Optimizing GPU performance](https://cloud.google.com/compute/docs/gpus/add-gpus#gpu-performance) section.
@@ -49,11 +49,11 @@ We will create a new instance using a public image and customize it. You can cre
 
       With that done, run
 
-            source .bashrc
+            $ source .bashrc
 
       And to verify that the change took effect:
 
-            echo $CUDA_HOME $LD_LIBRARY_PATH
+            $ echo $CUDA_HOME $LD_LIBRARY_PATH
 
     - Next, finish the rest of the steps by following the instructions [here](https://github.com/GoogleCloudPlatform/ml-on-gcp/blob/master/gce/survival-training/README-tf-estimator.md#cudnn-library).
 
@@ -63,15 +63,15 @@ We will create a new instance using a public image and customize it. You can cre
 
       + To do this, we must install everything under `root` in order to make the automatic model submission and training feature work. Now, log in as `root` in your instance by typing:
 
-            sudo -s
+            $ sudo -s
 
         Now you can install `pip` and other developer tools:
 
-            apt-get --assume-yes install python-pip python-dev build-essential
+            $ apt-get --assume-yes install python-pip python-dev build-essential
 
         Now, install `tensorflow-gpu` for your GPU-enabled instance:
 
-            pip install tensorflow-gpu
+            $ pip install tensorflow-gpu
 
         Then, you can install other Python libraries one by one; or you can install all together using a `requirement.txt` file.
 
@@ -80,8 +80,8 @@ We will create a new instance using a public image and customize it. You can cre
 
     - Now, your instance is fully configured. Stop it to create a boot image.
 
-          gcloud compute instances stop cifar10-estimator
-          gcloud compute images create my-boot-image --source-disk my-1st-instance --source-disk-zone us-east1-c
+          $ gcloud compute instances stop cifar10-estimator
+          $ gcloud compute images create my-boot-image --source-disk my-1st-instance --source-disk-zone us-east1-c
 
       That is it. You now have an boot image to create other instances with exactly the same state (GPU configurations, python libraries, etc.). And you can [share your image among other projects](https://cloud.google.com/compute/docs/images/sharing-images-across-projects).
 
@@ -102,12 +102,12 @@ We will create a new instance using a public image and customize it. You can cre
     - Now you have gone through all setup steps and are ready to actually submit a model for training. Follow the example `submit_model_gpu.sh` or `submit_model.sh` files to configure your new instance.
     - To actually submit your model to a new GCE instance just run:
 
-          ./submit_model.sh
+          $ ./submit_model.sh
 
     - You can monitor the instance by going to the [GCE console](https://console.cloud.google.com/compute/instances?project=) and click the newly created instance. Alternatively, you can follow the instruction shown in shell prompt to stream your `syslog` to your terminal.
 
-          gcloud compute instances tail-serial-port-output test-gpu2 --port 1
+          $ gcloud compute instances tail-serial-port-output test-gpu2 --port 1
 
     - Once completed, remember to delete your instance, from either the Cloud console or command line, if you no longer want it.
 
-        gcloud compute instances delete my-instance
+          $ gcloud compute instances delete my-instance

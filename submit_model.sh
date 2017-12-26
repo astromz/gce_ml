@@ -1,7 +1,7 @@
 #!/bin/bash
 
 new_instance_name="test-cpu1"  # unique name for new instance
-gce_username='my_gce_username' # account username for gce instance 
+gce_username='my_gce_username' # replace with your account username for gce instance 
 project="my-proj-dev"          # project-id
 boot_image_name="test-image-2cpu-6gb" # pre-created boot image
 image_project=$project
@@ -17,7 +17,7 @@ zone="us-east1-c"
 # Trainer Variables
 job_id=$new_instance_name          # unique job id 
 job_dir="gs://my-proj/test_dir"    # parent dir on GCS
-trainer_module="trainer.test"
+trainer_module="trainer.task"
 trainer_package_path="./package/"
 trainer_config="./trainer_configs/trainer_config.yaml"
 train_data_path="gs://my-proj/"    # data need to be pre-uploaded to GCS

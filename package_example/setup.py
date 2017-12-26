@@ -11,8 +11,8 @@ REQUIRED_PACKAGES = [
                      'pyYaml>=3.12',
                      'keras>=2.0',
                      'matplotlib',
-		             'h5py'#,
-                     #'tensorflow>=1.2'  # do not include if has custom compiled version   
+                     'h5py'#,
+                     #'tensorflow>=1.2'  # do not include if has custom compiled version
                      ]
 
 

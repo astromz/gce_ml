@@ -17,7 +17,7 @@ zone="us-east1-c"	       # recommend "us-east1-c"
 # Trainer Variables
 job_id=$new_instance_name          # unique job id
 job_dir="gs://my-proj/test_dir"    # parent dir for your jon on GCS
-trainer_module="trainer.test"      # module that actually dose the training
+trainer_module="trainer.task"      # module that actually dose the training
 trainer_package_path="./package/"  # package on local drive
 trainer_config="./trainer_configs/trainer_config.yaml"
 train_data_path="gs://my-proj/"    # data need to be pre-uploaded to GCS
