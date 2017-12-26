@@ -6,7 +6,14 @@ It also shows how to use Tensorboard in Keras and save files in Cloud Storage.
 Meanwhile the example allows the exploration of using "deconv" layers (i.e., transposed convolution), dilated convolution (atrous convolution), as well as comparing batch norm before and after a non-linear activation layer.
 
 #### Prerequisite
-Set up gce_ML by following this [link](https://github.com/astromz/gce_ml)/
+  - Set up gce_ML by following this [link](https://github.com/astromz/gce_ml).
+  - Similar to Cloud ML, **please follow the file structure of this example strictly to make the whole gce_ML package work**. Specifically, you will need:
+    1. A `setup.py` file for your python package in the same way as using `setuptools`.
+    2. A folder called `trainer` (or something else) that contains the code.
+    3. A `task.py` that wraps your model training code (`mnist_autoencoder_deconv_simple.py` in this example) and passes arguments and configurations to the model.
+    4. Your model that actually does the training (e.g., `mnist_autoencoder_deconv_simple.py`)
+    5. A configuration `yaml` file that contains all model-specific input variables (e.g., learning rate, loss function, number of epochs to train, and all hyper-parameters for your model). This file should reside outside the code package. 
+
 
 #### Training
  - Configure your GCE submission script here. Then run:
