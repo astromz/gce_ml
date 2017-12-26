@@ -1,5 +1,5 @@
 # gce_ML
-This package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to Cloud ML but has more flexibility for custom GPU, CPU, and RAM configurations.
+This package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to [Cloud ML](https://cloud.google.com/ml-engine/docs/technical-overview) but has more flexibility for custom GPU, CPU, and RAM configurations.
 
 
 ### Prerequisite
@@ -13,8 +13,8 @@ This package makes ML model training with Google Compute Engine (GCE) easy with 
     - **Note**: Please follow the exact folder structure when making your own cloud ML package after trying this example. Change `setup.py` and `trainer.task.py` accordingly. For details, check [here](https://cloud.google.com/ml-engine/docs/images/recommended-project-structure.png) and [here](https://cloud.google.com/ml-engine/docs/how-tos/packaging-trainer)
 
 
-### Create a GCE virtual machine instance and a custom boot image
-We will create a new instance using a public image and customize it. You can create GCE instances using pre-existing custom images later. *This instruction is based on the example and steps from [here](https://github.com/GoogleCloudPlatform/ml-on-gcp/tree/master/gce/survival-training) with some modifications.*
+### Create a GCE instance, a custom boot image, and train your models at scale
+We will create a new GCE virtual machine instance using a public image and customize it. You can create GCE instances using pre-existing custom images later. *This instruction is based on the example and steps from [here](https://github.com/GoogleCloudPlatform/ml-on-gcp/tree/master/gce/survival-training) with some modifications.*
 
 1. Create your instance. The easiest way is to use the Cloud Console [here](create the Compute Engine instance through the Cloud Console). Follow this [link](https://cloud.google.com/compute/docs/instances/create-start-instance).
     - Feel free to play with the customization of CPUs, memory, disk storage, etc. For GPUs, see below.
