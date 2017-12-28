@@ -340,8 +340,8 @@ fi
 
 echo
 echo "For degbugging, try 'gcloud compute ssh $INSTANCE_NAME' to log in to the created instance. \
-Startup logs can be found with 'cat /var/log/syslog | grep startup-script' "
-echo "To stream log, try 'gcloud compute instances tail-serial-port-output $INSTANCE_NAME --port 1' "
+You must debug as root by typing 'sudo -s'. Startup logs can be found with 'cat /var/log/syslog | grep startup-script' "
+echo "To stream startup logs, try 'gcloud compute instances tail-serial-port-output $INSTANCE_NAME --port 1' "
 echo
 
 # set project for instance
