@@ -1,5 +1,5 @@
 # gce_ML
-This package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to the [Cloud ML Engine](https://cloud.google.com/ml-engine/docs/technical-overview) but offers more flexibility for customization (e.g., GPU, CPU, and RAM configurations) and debugging.
+This small package makes ML model training with Google Compute Engine (GCE) easy with simple model submission and automatic VM instance management. This is very similar to the [Cloud ML Engine](https://cloud.google.com/ml-engine/docs/technical-overview) but offers more flexibility for customization (e.g., GPU, CPU, and RAM configurations) and debugging.
 
 ### Why use this package?
 There are two primary advantages:
@@ -8,7 +8,7 @@ There are two primary advantages:
 
   2. Debugging is easier. You can log in to the instance to debug and diagnose any problems in the cloud environment (e.g., with specific GPUs and memory and so on), instead of having to debug locally, re-submit your job, wait for 6-10 min for a new instance to start, and iterate.
 
-Setting up the package takes some time, but once it is properly configured, you can submit and train your models in the same way as for Cloud ML. 
+Setting up the package takes some time, but once it is properly configured, you can submit and train your models in the same way as in Cloud ML.
 
 ### Prerequisite
 + Google Cloud Platform account and billing enabled. Follow this [link](https://cloud.google.com/ml-engine/docs/command-line)  
