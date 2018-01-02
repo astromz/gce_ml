@@ -48,7 +48,7 @@ We will create a new GCE virtual machine instance using a public image and custo
 
               $ gcloud compute ssh [my_instance] --zone=us-east-1c
 
-        + Follow [this link](https://cloud.google.com/compute/docs/gpus/add-gpus#install-driver-script) to install drivers. Click `UBUNTU` to see the script for `Ubuntu 16.04 LTS - CUDA 8` (other driver versions are not supported!).
+        + Follow [this link](https://cloud.google.com/compute/docs/gpus/add-gpus#install-driver-script) to install drivers. Click `UBUNTU` to see the script for `Ubuntu 16.04 LTS - CUDA 8` (Tensorflow does not support other driver versions yet!).
     - Note the [Optimizing GPU performance](https://cloud.google.com/compute/docs/gpus/add-gpus#gpu-performance) section.
     - Next, as per the TensorFlow instructions (also [outlined here](https://github.com/GoogleCloudPlatform/ml-on-gcp/blob/master/gce/survival-training/README-tf-estimator.md#cuda-drivers)), add the CUDA path to our `LD_LIBRARY_PATH` environment variable in `~/.bashrc` file on the VM. Add the following lines to the end of your .bashrc:
 
@@ -97,10 +97,10 @@ We will create a new GCE virtual machine instance using a public image and custo
           $ gcloud compute instances stop my-instance
           $ gcloud compute images create my-boot-image --source-disk my-instance --source-disk-zone us-east1-c
 
-      That is it. You now have a boot image to create other instances with exactly the same state (GPU configurations, python libraries, etc.). And you can [share your image among other projects](https://cloud.google.com/compute/docs/images/sharing-images-across-projects).
+      That is it. You now have a boot image to create other instances with exactly the same state (GPU configurations, python libraries, etc.). Also, you can [share your image among other projects](https://cloud.google.com/compute/docs/images/sharing-images-across-projects).
 
 4. Set up Cloud Storage (GCS) for all your data and files
-    - Like Cloud ML, we will store all data, logs, and model checkpoints on Cloud Storage buckets. You will need to create a bucket for this project beforehand (if you have not). Just follow this [link](https://cloud.google.com/storage/docs/creating-buckets) and create a bucket (e.g., `my_bucket`).
+    - Like Cloud ML, we store all data, logs, and model checkpoints on Cloud Storage buckets. You will need to create a bucket for this project beforehand (if you have not). Just follow this [link](https://cloud.google.com/storage/docs/creating-buckets) and create a bucket (e.g., `my_bucket`).
     - Upload your data to your GCS bucket for later access. You can upload data to a new bucket or the bucket just created.
     - Now, the `JOB_DIR` variable that you will need later is: `gs://project_name/my_bucket/`. Each submitted model automatically creates a subfolder inside it.
 
@@ -113,21 +113,21 @@ Finally, we are ready to set up this package and train your models.
 2. Set up your model in python
     - Use the autoencoder-decoder model in `package_example/` as an example.
     - Your training package should be constructed in pretty much the same way as in Cloud ML instances. Follow the exact folder structure listed [here](https://cloud.google.com/ml-engine/docs/images/recommended-project-structure.png) and [here](https://cloud.google.com/ml-engine/docs/how-tos/packaging-trainer) when making your own cloud ML package. Change `setup.py` and `trainer.task.py` accordingly.
-    - **NOTE 1:** There is, however, one small difference between this package and Cloud ML -- your model input variables are supplied by an external `yaml` configuration file instead of using `bash` commands. This approach actually makes your training easier to manage, as once you set up your gce_ml submission script, the only things you need to change are the new instance name (actually not necessary if using timestamp as instance name) and the `yaml` configuration file (for different model parameters).
+    - **NOTE 1:** There is, however, one small difference between this package and Cloud ML -- your model input variables are supplied by an external `YAML` configuration file instead of using `bash` commands. This approach actually makes your training easier to manage, as once you set up your gce_ml submission script, the only things you need to change are the new instance name (actually not necessary if using timestamp as instance name) and the `YAML` configuration file (for different model parameters).
     - **NOTE 2:** You can rename your package to your liking, but make sure the folder `gce_scripts/` exists and resides at the same level as your `submis_model.sh` script (again, follow the directory structure of the package).  
 
 2. Model training with **gce_ML**
-    - Now you have gone through all setup steps and are ready to actually submit a model for training. Follow the example in  `submit_model_gpu.sh` or `submit_model.sh` to configure your new instance.
-    - To actually submit your model to a new GCE instance, just run:
+    - Now you have gone through all setup steps and are finally ready to submit a model for training. Follow the example in  `submit_model_gpu.sh` or `submit_model.sh` to configure your new instance.
+    - To submit your model to a new GCE instance, just run:
 
           $ ./submit_model.sh
 
-    - You can monitor the instance by going to the [GCE console](https://console.cloud.google.com/compute/instances?project=) and click the newly created instance. Alternatively, you can follow the instruction shown in shell prompt to stream your `syslog` to your terminal.
+    - You can monitor the instance by going to the [GCE console](https://console.cloud.google.com/compute/instances?project=) and click the newly created instance. Alternatively, you can follow the instruction shown in the shell prompt to stream your `syslog` to your terminal.
 
           $ gcloud compute instances tail-serial-port-output my-instance-with-gpu --port 1
 
     - Your instance **will automatically shut down** once completed and can be restarted later. If needed, you can keep it alive for a given number of seconds so you can log in and debug.
-    - Finally, **remember to delete your instance** from either the [Cloud Console](https://console.cloud.google.com/compute/instances?project=) or command line. It will automatically shut down but will not delete itself from the cloud. Each instance (and its associated job) is supposed to have a unique name, so you will not need it afterward (reuse will not save resource).
+    - Finally, **remember to delete your instance** from either the [Cloud Console](https://console.cloud.google.com/compute/instances?project=) or command line. It automatically shuts down but does not delete itself from the cloud. Each instance (and its associated job) is supposed to have a unique name, so you will not need it afterward (reuse will not save resource).
 
           $ gcloud compute instances delete my-instance
 
