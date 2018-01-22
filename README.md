@@ -8,6 +8,8 @@ There are two primary advantages:
 
   2. Debugging is more straightforward than Cloud ML. You can log in to the instance to debug and diagnose any problems in the cloud environment (e.g., with specific GPUs and memory and so on), instead of having to debug locally, re-submit your job, wait for 6-10 min for a new instance to start, and iterate.
 
+  3. More affordable GPU power and VM resources. Using GCE's [Preemptible VM](https://cloud.google.com/preemptible-vms/) instances can significantly reduce cost (50% off), as long as you save your model frequently and do not need your instances to run continuously. Even better, Google just announced [Preemptible GPUs](https://cloudplatform.googleblog.com/2018/01/introducing-preemptible-gpus-50-off.html), which will make GPUs more affordable as well. Accordingly to Google: "You can now attach NVIDIA K80 and NVIDIA P100 GPUs to Preemptible VMs for $0.22 and $0.73 per GPU hour, respectively. This is 50% cheaper than GPUs attached to on-demand instances, ..."
+
 Setting up the package takes some time, but once you correctly configure it, you can submit and train your models in the same way as in Cloud ML.
 
 ### Prerequisite
