@@ -1,0 +1,18 @@
+#example requirements file for your VM instance
+pyYaml>=3.12
+keras>=2.0
+scikit-learn
+h5py
+scipy
+scikit-image >= 0.13.0
+pandas
+Pillow
+matplotlib>=2.0
+oauth2client
+nltk
+seaborn
+gensim
+statsmodels
+requests>=2.11.1
+html
+opencv-python
