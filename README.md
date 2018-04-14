@@ -13,7 +13,7 @@ There are three primary advantages:
 Setting up the package takes some time, but once you correctly configure it, you can submit and train your models in the same way as in Cloud ML.
 
 ### Prerequisite
-+ Google Cloud Platform account and billing enabled. Follow this [link](https://cloud.google.com/ml-engine/docs/command-line)  
++ Google Cloud Platform account and billing enabled. Follow this [link](https://cloud.google.com/ml-engine/docs/command-line)
     - Select or create a project on Google Cloud Platform
     - For first time users, enable billing. You can sign up for a free trial with $300 credits.
     - Install the [Google Cloud SDK](https://cloud.google.com/sdk/docs/quickstart-mac-os-x#before-you-begin). We will use the `gcloud` CLI for our tasks.
@@ -25,6 +25,8 @@ Setting up the package takes some time, but once you correctly configure it, you
 
 ### Create a GCE instance and then a custom boot image
 We will create a new GCE virtual machine instance using a public image and customize it. You can then create GCE instances using pre-existing custom images later. *This instruction is based on the example and steps from [here (Compute Engine survival training)](https://github.com/GoogleCloudPlatform/ml-on-gcp/tree/master/gce/survival-training) with modifications and a few more details.*
+
+You can also use the packer files in [packer/](packer/) to create a basic image with CUDA, cuDNN and Tensorflow installed.
 
 1. Create your instance. The easiest way is to use the Cloud Console [here](https://console.cloud.google.com/compute/). Follow this [link](https://cloud.google.com/compute/docs/instances/create-start-instance).
     - Feel free to play with the customization of CPUs, memory, disk storage, etc. For GPUs, see below.
@@ -141,7 +143,7 @@ Finally, we are ready to set up this package and train your models.
     - Use the autoencoder-decoder model in `package_example/` as an example.
     - Your training package should be constructed in pretty much the same way as in Cloud ML instances. Follow the exact folder structure listed [here](https://cloud.google.com/ml-engine/docs/images/recommended-project-structure.png) and [here](https://cloud.google.com/ml-engine/docs/how-tos/packaging-trainer) when making your own cloud ML package. Change `setup.py` and `trainer.task.py` accordingly.
     - **NOTE 1:** There is, however, one small difference between this package and Cloud ML -- your model input variables are supplied by an external `YAML` configuration file instead of using `bash` commands. This approach actually makes your training easier to manage, as once you set up your gce_ml submission script, the only things you need to change are the new instance name (actually not necessary if using timestamp as instance name) and the `YAML` configuration file (for different model parameters).
-    - **NOTE 2:** You can rename your package to your liking, but make sure the folder `gce_scripts/` exists and resides at the same level as your `submis_model.sh` script (again, follow the directory structure of the package).  
+    - **NOTE 2:** You can rename your package to your liking, but make sure the folder `gce_scripts/` exists and resides at the same level as your `submis_model.sh` script (again, follow the directory structure of the package).
 
 2. Model training with **gce_ML**
     - Now you have gone through all setup steps and are finally ready to submit a model for training. Follow the example in  `submit_model_gpu.sh` or `submit_model.sh` to configure your new instance.

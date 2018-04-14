@@ -1,0 +1,27 @@
+{
+    "builders": [
+        {
+        "type": "googlecompute",
+        "disable_default_service_account": true,
+        "project_id": "YOUR-PROJECT",
+        "zone": "us-east1-c",
+        "machine_type": "n1-standard-2",
+        "disk_type": "pd-ssd",
+        "source_image": "ubuntu-1604-xenial-v20180405",
+        "source_image_family": "ubuntu-1604-lts",
+        "ssh_username": "packer",
+        "image_name": "ubuntu-cuda9-tf17-{{timestamp}}"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "libcudnn7_7.0.5.deb",
+            "destination": "/tmp/libcudnn7_7.0.5.deb"
+        },
+        {
+            "type": "shell",
+            "script": "./provision.sh"
+        }
+    ]
+}
